@@ -1,0 +1,80 @@
+$date
+	Tue Oct 15 09:00:42 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module task1_tb $end
+$var wire 8 ! acc_reg [7:0] $end
+$var reg 1 " clk $end
+$var reg 4 # data [3:0] $end
+$var reg 1 $ reset $end
+$scope module obj $end
+$var wire 8 % acc_reg [7:0] $end
+$var wire 1 " clk $end
+$var wire 4 & data [3:0] $end
+$var wire 1 $ reset $end
+$var reg 8 ' Y [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 '
+b0 &
+b0 %
+0$
+b0 #
+0"
+b0 !
+$end
+#5
+1"
+#10
+0"
+1$
+#15
+1"
+#20
+0"
+b1 #
+b1 &
+#25
+b1 !
+b1 %
+b1 '
+1"
+#30
+0"
+b10 #
+b10 &
+#35
+b11 !
+b11 %
+b11 '
+1"
+#40
+0"
+b11 #
+b11 &
+#45
+b110 !
+b110 %
+b110 '
+1"
+#50
+0"
+b100 #
+b100 &
+#55
+b1010 !
+b1010 %
+b1010 '
+1"
+#60
+0"
+b101 #
+b101 &
