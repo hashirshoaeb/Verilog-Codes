@@ -15,7 +15,7 @@ module task4_tb();
         #10
         reset = 1;
         #10
-        
+        // Todo: combinations left..
         $finish();
         
     end
