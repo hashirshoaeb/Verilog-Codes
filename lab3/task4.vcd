@@ -1,0 +1,87 @@
+$date
+	Thu Oct 17 23:12:33 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module task4_tb $end
+$var wire 16 ! out [15:0] $end
+$var reg 1 " clk $end
+$var reg 16 # in [15:0] $end
+$var reg 1 $ reset $end
+$var reg 1 % sel_12 $end
+$var reg 1 & sel_3 $end
+$scope module obj $end
+$var wire 1 " clk $end
+$var wire 16 ' in [15:0] $end
+$var wire 1 $ reset $end
+$var wire 1 % sel_12 $end
+$var wire 1 & sel_3 $end
+$var wire 16 ( sum_out [15:0] $end
+$var wire 16 ) sub_out [15:0] $end
+$var wire 16 * mux_out_3 [15:0] $end
+$var wire 16 + mux_out_2 [15:0] $end
+$var wire 16 , mux_out_1 [15:0] $end
+$var reg 16 - out [15:0] $end
+$var reg 16 . reg_a [15:0] $end
+$var reg 16 / reg_b [15:0] $end
+$scope module obj0 $end
+$var wire 16 0 a [15:0] $end
+$var wire 16 1 b [15:0] $end
+$var wire 1 % select $end
+$var reg 16 2 out [15:0] $end
+$upscope $end
+$scope module obj1 $end
+$var wire 16 3 a [15:0] $end
+$var wire 16 4 b [15:0] $end
+$var wire 1 % select $end
+$var reg 16 5 out [15:0] $end
+$upscope $end
+$scope module obj2 $end
+$var wire 16 6 a [15:0] $end
+$var wire 16 7 b [15:0] $end
+$var wire 1 & select $end
+$var reg 16 8 out [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 8
+b0 7
+b0 6
+b0 5
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b0 -
+b0 ,
+b0 +
+b0 *
+b0 )
+b0 (
+b0 '
+0&
+0%
+0$
+b0 #
+0"
+b0 !
+$end
+#5
+1"
+#10
+0"
+1$
+#15
+1"
+#20
+0"
