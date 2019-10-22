@@ -1,0 +1,109 @@
+$date
+	Fri Oct 18 03:46:08 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module FullAdder_4b_tb $end
+$var wire 1 ! Sum3 $end
+$var wire 1 " Sum2 $end
+$var wire 1 # Sum1 $end
+$var wire 1 $ Sum0 $end
+$var wire 1 % Cout3 $end
+$var reg 1 & A0 $end
+$var reg 1 ' A1 $end
+$var reg 1 ( A2 $end
+$var reg 1 ) A3 $end
+$var reg 1 * B0 $end
+$var reg 1 + B1 $end
+$var reg 1 , B2 $end
+$var reg 1 - B3 $end
+$var reg 1 . Cin $end
+$scope module obj $end
+$var wire 1 & A0 $end
+$var wire 1 ' A1 $end
+$var wire 1 ( A2 $end
+$var wire 1 ) A3 $end
+$var wire 1 * B0 $end
+$var wire 1 + B1 $end
+$var wire 1 , B2 $end
+$var wire 1 - B3 $end
+$var wire 1 . Cin $end
+$var wire 1 ! Sum3 $end
+$var wire 1 " Sum2 $end
+$var wire 1 # Sum1 $end
+$var wire 1 $ Sum0 $end
+$var wire 1 % Cout3 $end
+$var wire 1 / Cout2 $end
+$var wire 1 0 Cout1 $end
+$var wire 1 1 Cout0 $end
+$scope module obj0 $end
+$var wire 1 & A $end
+$var wire 1 * B $end
+$var wire 1 . Cin $end
+$var wire 1 1 Cout $end
+$var wire 1 $ Sum $end
+$upscope $end
+$scope module obj1 $end
+$var wire 1 ' A $end
+$var wire 1 + B $end
+$var wire 1 1 Cin $end
+$var wire 1 0 Cout $end
+$var wire 1 # Sum $end
+$upscope $end
+$scope module obj2 $end
+$var wire 1 ( A $end
+$var wire 1 , B $end
+$var wire 1 0 Cin $end
+$var wire 1 / Cout $end
+$var wire 1 " Sum $end
+$upscope $end
+$scope module obj3 $end
+$var wire 1 ) A $end
+$var wire 1 - B $end
+$var wire 1 / Cin $end
+$var wire 1 % Cout $end
+$var wire 1 ! Sum $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+01
+00
+0/
+0.
+0-
+0,
+0+
+0*
+0)
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#10
+1#
+11
+1*
+1&
+#20
+1%
+1/
+10
+0!
+0"
+0#
+1)
+1(
+1'
+#30

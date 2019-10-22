@@ -1,0 +1,68 @@
+$date
+	Sat Oct 19 02:12:09 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module mac_tb $end
+$var wire 32 ! Acc [31:0] $end
+$var reg 8 " A [7:0] $end
+$var reg 8 # B [7:0] $end
+$var reg 8 $ C [7:0] $end
+$var reg 8 % D [7:0] $end
+$var reg 1 & clk $end
+$var reg 1 ' reset $end
+$scope module obj $end
+$var wire 8 ( A [7:0] $end
+$var wire 8 ) B [7:0] $end
+$var wire 8 * C [7:0] $end
+$var wire 8 + D [7:0] $end
+$var wire 1 & clk $end
+$var wire 1 ' reset $end
+$var reg 32 , Acc [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 ,
+b10 +
+b10 *
+b10 )
+b10 (
+0'
+0&
+b10 %
+b10 $
+b10 #
+b10 "
+b0 !
+$end
+#5
+1&
+#10
+0&
+1'
+#15
+b1000 !
+b1000 ,
+1&
+#20
+0&
+b11 %
+b11 +
+b11 $
+b11 *
+b11 #
+b11 )
+b11 "
+b11 (
+#25
+b11010 !
+b11010 ,
+1&
+#30
+0&
