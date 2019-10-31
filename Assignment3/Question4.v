@@ -10,7 +10,7 @@ module Question4(num,
     
     always@(num)
     begin
-        case(bcd_num)
+        case(num)
             0:out       = 1;   // 0000001
             1:out       = 79;  // 1001111
             2:out       = 18;  // 0010010
