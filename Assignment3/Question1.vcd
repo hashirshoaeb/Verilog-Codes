@@ -1,0 +1,97 @@
+$date
+	Thu Oct 31 20:50:38 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module Question1_tb $end
+$var wire 8 ! out [7:0] $end
+$var reg 1 " clk $end
+$var reg 4 # data [3:0] $end
+$var reg 1 $ reset $end
+$scope module obj $end
+$var wire 1 " clk $end
+$var wire 4 % data [3:0] $end
+$var wire 1 $ reset $end
+$var wire 1 & sum2 $end
+$var wire 1 ' sum1 $end
+$var wire 8 ( out [7:0] $end
+$var reg 8 ) acc1 [7:0] $end
+$var reg 8 * acc2 [7:0] $end
+$var reg 8 + acc3 [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 +
+b0 *
+b0 )
+b0 (
+0'
+0&
+b0 %
+0$
+b0 #
+0"
+b0 !
+$end
+#5
+1"
+#10
+0"
+1$
+#15
+1"
+#20
+1&
+b10 !
+b10 (
+1'
+0"
+b1 #
+b1 %
+#25
+b1 !
+b1 (
+0'
+b10 +
+b1 *
+b1 )
+1"
+#30
+0&
+b1 !
+b1 (
+1'
+0"
+b10 #
+b10 %
+#35
+b10 !
+b10 (
+1&
+b1 +
+b0 *
+1"
+#40
+0&
+b0 !
+b0 (
+0'
+0"
+b11 #
+b11 %
+#45
+1&
+b10 !
+b10 (
+1'
+b0 +
+b0 )
+1"
+#50
+0"
