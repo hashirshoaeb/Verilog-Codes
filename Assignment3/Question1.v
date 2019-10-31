@@ -12,7 +12,7 @@ module Question1(data,
     
     assign sum1 = data + acc1;
     assign sum2 = sum1 + acc2;
-    assign out  = sum1 + sum2;
+    assign out  = sum1 + sum2 + acc3;
     always@(posedge clk, negedge reset)
     begin
         if (reset == 0)
