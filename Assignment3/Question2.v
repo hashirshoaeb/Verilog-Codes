@@ -5,9 +5,9 @@ module Question2(x,
                  clk,
                  reset,
                  y);
-    input x;
+    input [3:0]x;
     input clk, reset;
-    output y;
+    output [3:0]y;
     reg x1, x2, x3, y1, y2;
     
     assign y = x - x1 + x2 + x3 + (y1 >> 1) + (y2 >> 2);
