@@ -3,7 +3,6 @@
 
 module Question4(num,
                  out);
-    
     input[3:0] num;
     output[6:0] out;
     reg[6:0] out;
