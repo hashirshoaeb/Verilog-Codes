@@ -1,0 +1,89 @@
+$date
+	Fri Nov  1 00:05:23 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module Question2_tb $end
+$var wire 4 ! y [3:0] $end
+$var reg 1 " clk $end
+$var reg 1 # reset $end
+$var reg 4 $ x [3:0] $end
+$scope module obj $end
+$var wire 1 " clk $end
+$var wire 1 # reset $end
+$var wire 4 % x [3:0] $end
+$var wire 4 & y [3:0] $end
+$var reg 1 ' x1 $end
+$var reg 1 ( x2 $end
+$var reg 1 ) x3 $end
+$var reg 1 * y1 $end
+$var reg 1 + y2 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0+
+0*
+0)
+0(
+0'
+b0 &
+b0 %
+b0 $
+0#
+0"
+b0 !
+$end
+#5
+1"
+#10
+0"
+1#
+#15
+1"
+#20
+0"
+b1 !
+b1 &
+b1 $
+b1 %
+#25
+1*
+b0 !
+b0 &
+1'
+1"
+#30
+0"
+b1 !
+b1 &
+b10 $
+b10 %
+#35
+1+
+1(
+b11 !
+b11 &
+0'
+1"
+#40
+0"
+b100 !
+b100 &
+b11 $
+b11 %
+#45
+0*
+1)
+0(
+b11 !
+b11 &
+1'
+1"
+#50
+0"

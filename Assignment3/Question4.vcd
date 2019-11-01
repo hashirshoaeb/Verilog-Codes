@@ -1,0 +1,56 @@
+$date
+	Fri Nov  1 02:38:01 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module Question4_tb $end
+$var wire 7 ! out [6:0] $end
+$var reg 4 " num [3:0] $end
+$scope module obj $end
+$var wire 4 # num [3:0] $end
+$var reg 7 $ out [6:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 $
+b0 #
+b0 "
+b1 !
+$end
+#10
+b1001111 !
+b1001111 $
+b1 "
+b1 #
+#20
+b10010 !
+b10010 $
+b10 "
+b10 #
+#30
+b110 !
+b110 $
+b11 "
+b11 #
+#40
+b1001100 !
+b1001100 $
+b100 "
+b100 #
+#50
+b100100 !
+b100100 $
+b101 "
+b101 #
+#60
+b100000 !
+b100000 $
+b110 "
+b110 #
+#70
