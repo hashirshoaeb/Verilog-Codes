@@ -10,5 +10,23 @@ module ALU(clk,
     wire Rk, Ri, Rj;
     reg [3:0]R;
     
+    // Data register
+    always@(posedge clk, negedge reset)
+    begin
+        if (reset == 0)
+        begin
+            R <= 4'b0011;
+        end
+        else
+        begin
+            case(sel_Rk)
+                0: R[0]       <= Rk;
+                1: R[1]       <= Rk;
+                2: R[2]       <= Rk;
+                default: R[3] <= Rk;
+            endcase
+        end
+    end
+    
     
 endmodule
