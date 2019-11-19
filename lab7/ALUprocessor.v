@@ -50,4 +50,14 @@ module ALU(clk,
         endcase
     end
     
+    // selecting operator
+    always@(sel_op)
+    begin
+        case(sel_op)
+            0: Rk       <= Ri + Rj;
+            1: Rk       <= Ri - Rj;
+            2: Rk       <= Ri & Rj;
+            default: Rk <= Ri | Rj;
+        endcase
+    end
 endmodule
