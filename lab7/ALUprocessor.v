@@ -3,51 +3,41 @@ module ALU(clk,
            sel_Ri,
            sel_Rj,
            sel_Rk,
-           sel_op);
+           sel_op,
+           seg_7);
     //parameter N = 4;
     input clk, reset;
     input [1:0] sel_Ri, sel_Rj, sel_Rk, sel_op;
-    reg Rk, Ri, Rj;
-    reg [3:0]R;
+    output [6:0] seg_7; //[abcdefg]
+    reg [2:0] Rk, Ri, Rj;
+    reg [2:0] R [3:0];
     
     // Data register
     always@(posedge clk, negedge reset)
     begin
         if (reset == 0)
         begin
-            R <= 4'b0011;
+            R[0] <= 4'b0011;
+            R[1] <= 4'b0101;
+            R[2] <= 4'b1001;
+            R[3] <= 4'b0001;
         end
         else
         begin
-            case(sel_Rk)
-                0: R[0]       <= Rk;
-                1: R[1]       <= Rk;
-                2: R[2]       <= Rk;
-                default: R[3] <= Rk;
-            endcase
+            R[sel_Rk] <= Rk;
         end
     end
     
     // selecting Ri
     always@(sel_Ri)
     begin
-        case(sel_Ri)
-            0: Ri      <= R[0];
-            1: Ri      <= R[1];
-            2: Ri      <= R[2];
-            default:Ri <= R[3];
-        endcase
+        Ri <= R[sel_Ri];
     end
     
     // selecting Rj
     always@(sel_Rj)
     begin
-        case(sel_Rj)
-            0: Rj      <= R[0];
-            1: Rj      <= R[1];
-            2: Rj      <= R[2];
-            default:Rj <= R[3];
-        endcase
+        Rj <= R[sel_Rj];
     end
     
     // selecting operator
@@ -58,6 +48,25 @@ module ALU(clk,
             1: Rk       <= Ri - Rj;
             2: Rk       <= Ri & Rj;
             default: Rk <= Ri | Rj;
+        endcase
+    end
+    
+    // 7 segment display
+    always@(Rk)
+    begin
+        case(Rk)
+            0: seg_7       = 7'b0000001;
+            1: seg_7       = 7'b1001111;
+            2: seg_7       = 7'b0010010;
+            3: seg_7       = 7'b0000110;
+            4: seg_7       = 7'b1001100;
+            5: seg_7       = 7'b0100100;
+            6: seg_7       = 7'b0100000;
+            7: seg_7       = 7'b0001111;
+            8: seg_7       = 7'b0000000;
+            9: seg_7       = 7'b0001100;
+            default: seg_7 = 7'b1111111;
+            
         endcase
     end
 endmodule
