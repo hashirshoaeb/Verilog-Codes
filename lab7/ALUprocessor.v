@@ -28,5 +28,16 @@ module ALU(clk,
         end
     end
     
+    // selecting Ri
+    always@(sel_Ri)
+    begin
+        case(sel_Ri)
+            0: Ri      <= R[0];
+            1: Ri      <= R[1];
+            2: Ri      <= R[2];
+            default:Ri <= R[3];
+        endcase
+    end
+    
     
 endmodule
