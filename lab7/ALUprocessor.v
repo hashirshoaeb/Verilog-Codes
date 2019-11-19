@@ -39,5 +39,15 @@ module ALU(clk,
         endcase
     end
     
+    // selecting Rj
+    always@(sel_Rj)
+    begin
+        case(sel_Rj)
+            0: Rj      <= R[0];
+            1: Rj      <= R[1];
+            2: Rj      <= R[2];
+            default:Rj <= R[3];
+        endcase
+    end
     
 endmodule
