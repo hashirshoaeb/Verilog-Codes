@@ -8,7 +8,7 @@ module ALU(clk,
     //parameter N = 4;
     input clk, reset;
     input [1:0] sel_Ri, sel_Rj, sel_Rk, sel_op;
-    output [6:0] seg_7; //[abcdefg]
+    output reg [6:0] seg_7; //[abcdefg]
     reg [2:0] Rk, Ri, Rj;
     reg [2:0] R [3:0];
     
