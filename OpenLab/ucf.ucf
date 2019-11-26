@@ -1,7 +1,13 @@
-NET "seg7[6]" LOC = "T17";
-NET "seg7[5]" LOC = "T18";
-NET "seg7[4]" LOC = "U17";
-NET "seg7[3]" LOC = "U18";
-NET "seg7[2]" LOC = "M14";
-NET "seg7[1]" LOC = "N14";
-NET "seg7[0]" LOC = "L14";
+NET "clk" LOC = "V10";
+NET "reset" LOC = "T5";
+NET "disp_switch" LOC = "V8";
+NET "sample_switch[0]" LOC  = "N8";
+NET "sample_switch[1]" LOC  = "U8";
+
+NET "seg_7[6]" LOC = "T17";
+NET "seg_7[5]" LOC = "T18";
+NET "seg_7[4]" LOC = "U17";
+NET "seg_7[3]" LOC = "U18";
+NET "seg_7[2]" LOC = "M14";
+NET "seg_7[1]" LOC = "N14";
+NET "seg_7[0]" LOC = "L14";
