@@ -44,11 +44,11 @@ module processor(clk,
         else
         begin
             if (counter <= 30000000)
-                counter = counter + 1;
+                counter <= counter + 1;
             else
             begin
-                counter = 0;
-                p_count = p_count + 1;
+                counter <= 0;
+                p_count <= p_count + 1;
             end
         end
     end
