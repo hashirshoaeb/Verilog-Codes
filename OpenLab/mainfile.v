@@ -8,9 +8,10 @@ module mainfile(clk,
     output reg [6:0]seg_7;
     reg [7:0]seg;
     
-    reg my_clk;
+    wire my_clk;
+    reg [25:0] counter;
     // Clk
-    assign my_clk = (counter > = 15000000);
+    assign my_clk = (counter > = 15000000); // join > and = 
     // Counter
     always@(posedge clk, negedge reset)
     begin
