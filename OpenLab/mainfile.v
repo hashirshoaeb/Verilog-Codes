@@ -9,8 +9,33 @@ module mainfile(clk,
     reg [7:0]seg;
     
     // initialise ROM for A and B
-    // do operating corelation
-    // switch to show output or switch value
+    reg [3:0] ROM_A [0:8];
+    reg [3:0] ROM_B [0:8];
+    reg [7:0] P; // 8 bit
+    
+    initial
+    begin
+        ROM_A[0] = 8'b0000;
+        ROM_A[1] = 8'b0001;
+        ROM_A[2] = 8'b0010;
+        ROM_A[3] = 8'b0011;
+        ROM_A[4] = 8'b0000;
+        ROM_A[5] = 8'b0000;
+        ROM_A[6] = 8'b0000;
+        ROM_A[7] = 8'b0000;
+        ROM_A[8] = 8'b0000;
+        ROM_B[0] = 8'b0000;
+        ROM_B[1] = 8'b0001;
+        ROM_B[2] = 8'b0010;
+        ROM_B[3] = 8'b0011;
+        ROM_B[4] = 8'b0000;
+        ROM_B[5] = 8'b0000;
+        ROM_B[6] = 8'b0000;
+        ROM_B[7] = 8'b0000;
+        ROM_B[8] = 8'b0000;
+    end
+    
+    reg [3:0] sum_count;
     reg [3:0] N_samples;
     always@(sample_switch)
     begin
@@ -21,13 +46,6 @@ module mainfile(clk,
             default: N_samples = 7'b1000;
         endcase
     end
-    
-    
-    reg [3:0] ROM_A [0:8];
-    reg [3:0] ROM_B [0:8];
-    reg [7:0] P; // 8 bit
-    
-    reg [3:0] sum_count;
     // operating corelation
     always@(posedge clk, negedge reset)
     begin
@@ -51,7 +69,7 @@ module mainfile(clk,
     begin
         case(disp_switch)
             0: seg       = {6'b0 , sample_switch[1:0]}; //8
-            default: seg = P; //8
+            default: seg = P[6:0]; //8
         endcase
     end
     
