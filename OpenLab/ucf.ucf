@@ -1,0 +1,7 @@
+NET "seg7[6]" LOC = "T17";
+NET "seg7[5]" LOC = "T18";
+NET "seg7[4]" LOC = "U17";
+NET "seg7[3]" LOC = "U18";
+NET "seg7[2]" LOC = "M14";
+NET "seg7[1]" LOC = "N14";
+NET "seg7[0]" LOC = "L14";
