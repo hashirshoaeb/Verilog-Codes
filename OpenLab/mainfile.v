@@ -8,6 +8,30 @@ module mainfile(clk,
     output reg [6:0]seg_7;
     reg [7:0]seg;
     
+    reg my_clk;
+    // Clk
+    assign my_clk = (counter > = 15000000);
+    // Counter
+    always@(posedge clk, negedge reset)
+    begin
+        if (reset == 0)
+        begin
+            counter <= 0;
+        end
+        else
+        begin
+            if (counter <= 30000000)
+                counter <= counter + 1;
+            else
+            begin
+                counter <= 0;
+            end
+        end
+    end
+    
+    
+    
+    
     // initialise ROM for A and B
     reg [3:0] ROM_A [0:8];
     reg [3:0] ROM_B [0:8];
@@ -47,7 +71,7 @@ module mainfile(clk,
         endcase
     end
     // operating corelation
-    always@(posedge clk, negedge reset)
+    always@(posedge my_clk, negedge reset)
     begin
         if (reset == 0)
         begin
