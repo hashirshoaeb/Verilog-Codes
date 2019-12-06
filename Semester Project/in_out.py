@@ -13,5 +13,6 @@ f = open("in.txt","w+")
 for rows in image2d:
     for pixel in rows:
         # print(j)
-        f.writelines([str(pixel), '\n'])
+        binary = "{0:08b}".format(pixel)
+        f.writelines([str(binary), '\n'])
 f.close()
