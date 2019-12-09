@@ -17,35 +17,35 @@ for rows in image2d:
         f.writelines([str(binary), '\n'])
 f.close()
 
-# n = 64
-# for i in range(1,n-2):
-#     k = 0 + (i * n)
-#     for j in range(1,n-2):
-#         l0 = k - n + j - 1
-#         l1 = k - n + j
-#         l2 = k - n + (j + 1)
-#         l3 = k + (j - 1)
-#         l4 = k + j
-#         l5 = k + (j + 1)
-#         l6 = k + n + (j - 1)
-#         l7 = k + n + j
-#         l8 = k + n + (j + 1)
-#         print(l0, l1, l2,l3,l4,l5,l6,l7,l8)
-
-
 n = 64
-def convmatrix(i,j):
+for i in range(1,n-1):
     k = 0 + (i * n)
-    l0 = k - n + j - 1
-    l1 = k - n + j
-    l2 = k - n + (j + 1)
-    l3 = k + (j - 1)
-    l4 = k + j
-    l5 = k + (j + 1)
-    l6 = k + n + (j - 1)
-    l7 = k + n + j
-    l8 = k + n + (j + 1)
-    print(l0, l1, l2,l3,l4,l5,l6,l7,l8)
+    for j in range(1,n-1):
+        l0 = k - n + j - 1
+        l1 = k - n + j
+        l2 = k - n + (j + 1)
+        l3 = k + (j - 1)
+        l4 = k + j
+        l5 = k + (j + 1)
+        l6 = k + n + (j - 1)
+        l7 = k + n + j
+        l8 = k + n + (j + 1)
+        print(l0, l1, l2,l3,l4,l5,l6,l7,l8, i , j)
 
-convmatrix(1,1)
-convmatrix(62,62)
+
+# n = 64
+# def convmatrix(i,j):
+#     k = 0 + (i * n)
+#     l0 = k - n + j - 1
+#     l1 = k - n + j
+#     l2 = k - n + (j + 1)
+#     l3 = k + (j - 1)
+#     l4 = k + j
+#     l5 = k + (j + 1)
+#     l6 = k + n + (j - 1)
+#     l7 = k + n + j
+#     l8 = k + n + (j + 1)
+#     print(l0, l1, l2,l3,l4,l5,l6,l7,l8)
+#
+# convmatrix(1,1)
+# convmatrix(62,62)

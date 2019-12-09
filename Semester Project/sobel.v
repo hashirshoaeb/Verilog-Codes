@@ -22,15 +22,15 @@
 // $fwrite(id, out);
 // $fwrite(id, “\n”); 	//for newline
 // end
-`include "get_Index.v"
+// `include "get_Index.v"
 module sobel();
     // https://timetoexplore.net/blog/initialize-memory-in-verilog
     reg [7:0] ROM_IN  [0:4095];  // = > 64*64 - 1 = > sizeofimage - 1
     reg [7:0] ROM_OUT [0:4095];
     reg clk;
-    reg [5:0] i, j;
+    reg [6:0] i, j, n;
 
-    wire [11:0] l0,l1,l2,l3,l4,l5,l6,l7,l8;
+    reg [12:0] k,l0,l1,l2,l3,l4,l5,l6,l7,l8;
 
     initial
     begin
@@ -38,9 +38,8 @@ module sobel();
         $dumpvars(0, sobel);
         clk = 0;
         i = 1;
-        j = 1;
-        #5
-        clk = 1;
+        j = 0;
+        n = 64;
         // reading from in.txt and saving in ROM_IN from address 0 to 4095
         $readmemb ("in.txt", ROM_IN, 0, 4095);
         $monitor("data_file handle was %0b", ROM_IN[38]);
@@ -71,18 +70,31 @@ module sobel();
     // Variable ‘B’ is the base address of the array
     // Variable ‘n’ is the total number of the column of an image
 
-    get_Index obj(clk,i,j,l0,l1,l2,l3,l4,l5,l6,l7,l8);
+    // get_Index obj(clk,i,j,l0,l1,l2,l3,l4,l5,l6,l7,l8);
 
     always@(posedge clk)
     begin  
         j = j+1;
         if (j > 64-2)
         begin
-            j = 0;
+            j = 1;
             i = i + 1;
             if (i > 64-2)
-                i = 0;
-        end            
+                i = 1;
+        end
+
+        k = 0 + (i * n);
+        l0 = k - n + j - 1;
+        l1 = k - n + j;
+        l2 = k - n + (j + 1);
+        l3 = k + (j - 1);
+        l4 = k + j;
+        l5 = k + (j + 1);
+        l6 = k + n + (j - 1);
+        l7 = k + n + j;
+        l8 = k + n + (j + 1);
+
+        $monitor("%0d", l0, l1, l2, l3, l4, l5, l6, l7,l8);            
     end
 
     always // to generate clock
