@@ -29,17 +29,17 @@ module sobel();
     reg [7:0] ROM_OUT [0:4095];
     reg clk;
     reg [6:0] i, j, n;
-
+    
     reg [12:0] k,l0,l1,l2,l3,l4,l5,l6,l7,l8;
-
+    
     initial
     begin
         $dumpfile("sobel.vcd");
         $dumpvars(0, sobel);
         clk = 0;
-        i = 1;
-        j = 0;
-        n = 64;
+        i   = 1;
+        j   = 0;
+        n   = 64;
         // reading from in.txt and saving in ROM_IN from address 0 to 4095
         $readmemb ("in.txt", ROM_IN, 0, 4095);
         $monitor("data_file handle was %0b", ROM_IN[38]);
@@ -69,21 +69,23 @@ module sobel();
     // Variable ‘i’ represents row number whereas j represents column number
     // Variable ‘B’ is the base address of the array
     // Variable ‘n’ is the total number of the column of an image
-
+    
     // get_Index obj(clk,i,j,l0,l1,l2,l3,l4,l5,l6,l7,l8);
-
+    
     always@(posedge clk)
-    begin  
+    begin
         j = j+1;
         if (j > 64-2)
         begin
             j = 1;
             i = i + 1;
             if (i > 64-2)
+            begin
                 i = 1;
+                $finish();
+            end
         end
-
-        k = 0 + (i * n);
+        k  = 0 + (i * n);
         l0 = k - n + j - 1;
         l1 = k - n + j;
         l2 = k - n + (j + 1);
@@ -93,10 +95,10 @@ module sobel();
         l6 = k + n + (j - 1);
         l7 = k + n + j;
         l8 = k + n + (j + 1);
-
-        $monitor("%0d", l0, l1, l2, l3, l4, l5, l6, l7,l8);            
+        
+        $monitor("%0d", l0, l1, l2, l3, l4, l5, l6, l7,l8);
     end
-
+    
     always // to generate clock
     begin
     #10
