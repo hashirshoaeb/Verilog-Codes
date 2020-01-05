@@ -1,22 +1,26 @@
-// `include "get_Index.v"
-module sobel();
+`timescale 1ns / 1ps
+
+module sobel(d);
     // https://timetoexplore.net/blog/initialize-memory-in-verilog
     reg [7:0] ROM_IN  [0:4095];  // = > 64*64 - 1 = > sizeofimage - 1
     reg [7:0] ROM_OUT [0:4095];
-    reg clk;
+    reg clk, reset;
     reg [6:0] i, j, n;
-    
+    reg [3:0] count;
     reg [12:0] k,l0,l1,l2,l3,l4,l5,l6,l7,l8;
     
     initial
     begin
         $dumpfile("sobel.vcd");
         $dumpvars(0, sobel);
-        clk = 0;
-        i   = 1;
-        j   = 0;
-        n   = 64;
-        t   = 27;
+        reset = 1;
+        #5
+        reset = 0;
+        clk   = 0;
+        #5
+        n     = 64;
+        t     = 27;
+        reset = 1;
         // reading from in.txt and saving in ROM_IN from address 0 to 4095
         $readmemb ("in.txt", ROM_IN, 0, 4095);
         // $monitor("data_file handle was %0b", ROM_IN[38]);
@@ -25,20 +29,48 @@ module sobel();
         
     end
     
-    always@(posedge clk)
+    always@(posedge clk, negedge reset)
     begin
-        j = j+1;
-        if (j > 64-2)
+        if (reset == 0 || count == 9)
         begin
-            j = 1;
-            i = i + 1;
-            if (i > 64-2)
+            count <= 0;
+        end
+        else
+        begin
+            count <= count + 1;
+        end
+    end
+    
+    always@(posedge clk, negedge reset)
+    begin
+        if (reset == 0)
+        begin
+            i = 1;
+            j = 0;
+        end
+        else
+        begin
+            // $monitor("count %d", count);
+            if (count == 0)
             begin
-                i = 1;
-                $writememb("out.txt",ROM_OUT);
-                $finish();
+                j = j+1;
+                if (j > 64-2)
+                begin
+                    j = 1;
+                    i = i + 1;
+                    if (i > 64-2)
+                    begin
+                        i = 1;
+                        $writememb("out.txt",ROM_OUT);
+                        $finish();
+                    end
+                end
             end
         end
+    end
+    
+    always@(i, j)
+    begin
         k  = 0 + (i * n);
         l0 = k - n + j - 1;
         l1 = k - n + j;
@@ -49,8 +81,6 @@ module sobel();
         l6 = k + n + (j - 1);
         l7 = k + n + j;
         l8 = k + n + (j + 1);
-        
-        
     end
     
     always // to generate clock
@@ -72,17 +102,30 @@ module sobel();
     
     always@(posedge clk)
     begin
-        s0 = ROM_IN[l0]>>2;
-        s1 = ROM_IN[l1]>>2;
-        s2 = ROM_IN[l2]>>2;
-        s3 = ROM_IN[l3]>>2;
-        s4 = ROM_IN[l4]>>2;
-        s5 = ROM_IN[l5]>>2;
-        s6 = ROM_IN[l6]>>2;
-        s7 = ROM_IN[l7]>>2;
-        s8 = ROM_IN[l8]>>2;
-        
-        
+        if (count == 1)
+            s0 <= ROM_IN[l0]>>2;
+        else if (count == 2)
+            s1 <= ROM_IN[l1]>>2;
+        else if (count == 3)
+            s2 <= ROM_IN[l2]>>2;
+        else if (count == 4)
+            s3 <= ROM_IN[l3]>>2;
+        else if (count == 5)
+            s4 <= ROM_IN[l4]>>2;
+        else if (count == 6)
+            s5 <= ROM_IN[l5]>>2;
+        else if (count == 7)
+            s6 <= ROM_IN[l6]>>2;
+        else if (count == 8)
+            s7 <= ROM_IN[l7]>>2;
+        else if (count == 9)
+        begin
+            s8 <= ROM_IN[l8]>>2;
+        end
+        else
+        begin
+            
+        end
     end
     
     assign    a1 = s0+s1;
@@ -105,7 +148,7 @@ module sobel();
     mux_2_1 ob2(g4,g1,c5,f13);
     
     assign d = ~(c3&c4);
-    always@(*)
+    always@(posedge clk)
         ROM_OUT[l4] = d;
     
 endmodule
