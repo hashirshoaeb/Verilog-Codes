@@ -1,66 +1,48 @@
-`timescale 1ns / 1ps
-
-module sobel(d);
+`include "mux2x1.v"
+module sobel(clk,
+             reset);
     // https://timetoexplore.net/blog/initialize-memory-in-verilog
     reg [7:0] ROM_IN  [0:4095];  // = > 64*64 - 1 = > sizeofimage - 1
     reg [7:0] ROM_OUT [0:4095];
-    reg clk, reset;
-    reg [6:0] i, j, n;
+    input clk, reset;
+    reg [6:0] row, col, n;
     reg [3:0] count;
     reg [12:0] k,l0,l1,l2,l3,l4,l5,l6,l7,l8;
     
     initial
     begin
-        $dumpfile("sobel.vcd");
-        $dumpvars(0, sobel);
-        reset = 1;
-        #5
-        reset = 0;
-        clk   = 0;
-        #5
-        n     = 64;
-        t     = 27;
-        reset = 1;
+        n = 64;
+        t = 27;
         // reading from in.txt and saving in ROM_IN from address 0 to 4095
         $readmemb ("in.txt", ROM_IN, 0, 4095);
         // $monitor("data_file handle was %0b", ROM_IN[38]);
         // writing to out.txt from ROM_IN from address 0 to 4095
         // $writememb("out.txt",ROM_OUT);
-        
     end
     
-    always@(posedge clk, negedge reset)
-    begin
-        if (reset == 0 || count == 9)
-        begin
-            count <= 0;
-        end
-        else
-        begin
-            count <= count + 1;
-        end
-    end
     
     always@(posedge clk, negedge reset)
     begin
         if (reset == 0)
         begin
-            i = 1;
-            j = 0;
+            row   = 1;
+            col   = 1;
+            count = 0;
         end
         else
         begin
-            // $monitor("count %d", count);
-            if (count == 0)
+            count = count + 1;
+            if (count > 9)
             begin
-                j = j+1;
-                if (j > 64-2)
+                count = 0;
+                col   = col+1;
+                if (col > 64-2)
                 begin
-                    j = 1;
-                    i = i + 1;
-                    if (i > 64-2)
+                    col = 1;
+                    row = row + 1;
+                    if (row > 64-2)
                     begin
-                        i = 1;
+                        row = 1;
                         $writememb("out.txt",ROM_OUT);
                         $finish();
                     end
@@ -69,35 +51,29 @@ module sobel(d);
         end
     end
     
-    always@(i, j)
+    always@(row, col)
     begin
-        k  = 0 + (i * n);
-        l0 = k - n + j - 1;
-        l1 = k - n + j;
-        l2 = k - n + (j + 1);
-        l3 = k + (j - 1);
-        l4 = k + j;
-        l5 = k + (j + 1);
-        l6 = k + n + (j - 1);
-        l7 = k + n + j;
-        l8 = k + n + (j + 1);
+        k  = 0 + (row * n);
+        l0 = k - n + col - 1;
+        l1 = k - n + col;
+        l2 = k - n + (col + 1);
+        l3 = k + (col - 1);
+        l4 = k + col;
+        l5 = k + (col + 1);
+        l6 = k + n + (col - 1);
+        l7 = k + n + col;
+        l8 = k + n + (col + 1);
     end
     
-    always // to generate clock
-    begin
-    #10
-    clk = !clk;
-    end
     
     reg [7:0] t;
     reg [7:0]s0,s1,s2,s3,s4,s5,s6,s7,s8;
-    output wire d;
+    wire d;
     wire [7:0]a0,a1,a2,a3;
     wire [7:0]f9,f10,f11,f12,f13,f14;
     wire [7:0]g1,g2,g3,g4;
     wire c2,c5,c3,c4;
     wire [7:0]tem1,tem2;
-    
     
     
     always@(posedge clk)
@@ -124,7 +100,7 @@ module sobel(d);
         end
         else
         begin
-            
+            // REMOVE THE ELSE BLOCK
         end
     end
     
@@ -153,72 +129,53 @@ module sobel(d);
     
 endmodule
     
-    module mux_2_1(a,b,s,out);
-        input[7:0] a,b;
-        input s;
-        output[7:0] out;
-        reg[7:0] out;
-        
-        always@ (*)
-        begin
-            if (s == 0)
-            begin
-                out <= a;
-            end
-            else
-            begin
-                out <= b;
-            end
-        end
-    endmodule
-        
-        // In order to read and write a file following commands are used in Verilog.
-        // •	Reading a file in Verilog
-        // reg [<memory_width>] <reg_name> [<memory_depth>];
-        
-        // initial
-        // $readmemb ("<file_name>", <reg_name>, <start_address>, <end_address>);
-        
-        // •	Writing a file in verilog
-        // always@(posedge	 clk)
-        // $fwrite(<file_desc>, "%d", out);
-        // initial
-        // File_desc = $fopen(“filename.txt”,w);
-        
-        // integer id;
-        // initial
-        // Id = $fopen(“File path and name”, mode);	//here mode = “w”
-        
-        // always@(posedge clk)
-        // begin
-        //for reading sample by sample data and writing data into file
-        // for file writing using following syntax
-        // $fwrite(id, out);
-        // $fwrite(id, “\n”); 	//for newline
-        // end
-        
-        
-        // ________________
-        // | P0 | P1 | P2 |     --------> n columns
-        // |----|----|----|     |
-        // | P3 | P4 | P5 |     |
-        // |----|----|----|     |
-        // | P6 | P7 | P8 |     m rows
-        // ----------------
-        
-        // | P0 |
-        // | P1 |
-        // | P2 |
-        // | P3 |
-        // | P4 |
-        // | P5 |
-        // | P6 |
-        // | P7 |
-        // | P8 |
-        // row major
-        
-        // Variable ‘i’ represents row number whereas j represents column number
-        // Variable ‘B’ is the base address of the array
-        // Variable ‘n’ is the total number of the column of an image
-        
-        // get_Index obj(clk,i,j,l0,l1,l2,l3,l4,l5,l6,l7,l8);
+    // In order to read and write a file following commands are used in Verilog.
+    // •	Reading a file in Verilog
+    // reg [<memory_width>] <reg_name> [<memory_depth>];
+    
+    // initial
+    // $readmemb ("<file_name>", <reg_name>, <start_address>, <end_address>);
+    
+    // •	Writing a file in verilog
+    // always@(posedge	 clk)
+    // $fwrite(<file_desc>, "%d", out);
+    // initial
+    // File_desc = $fopen(“filename.txt”,w);
+    
+    // integer id;
+    // initial
+    // Id = $fopen(“File path and name”, mode);	//here mode = “w”
+    
+    // always@(posedge clk)
+    // begin
+    //for reading sample by sample data and writing data into file
+    // for file writing using following syntax
+    // $fwrite(id, out);
+    // $fwrite(id, “\n”); 	//for newline
+    // end
+    
+    
+    // ________________
+    // | P0 | P1 | P2 |     --------> n columns
+    // |----|----|----|     |
+    // | P3 | P4 | P5 |     |
+    // |----|----|----|     |
+    // | P6 | P7 | P8 |     m rows
+    // ----------------
+    
+    // | P0 |
+    // | P1 |
+    // | P2 |
+    // | P3 |
+    // | P4 |
+    // | P5 |
+    // | P6 |
+    // | P7 |
+    // | P8 |
+    // row major
+    
+    // Variable ‘i’ represents row number whereas j represents column number
+    // Variable ‘B’ is the base address of the array
+    // Variable ‘n’ is the total number of the column of an image
+    
+    // get_Index obj(clk,row,j,l0,l1,l2,l3,l4,l5,l6,l7,l8);
