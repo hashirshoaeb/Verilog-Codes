@@ -3,8 +3,13 @@
 
 module sobel_tb();
     reg clk, reset;
+    wire d;
+    wire [12:0] l4;
+    sobel obj(clk, reset, d, l4);
     
-    sobel obj(clk, reset);
+    reg [7:0] ROM_OUT [0:4095];
+    always@(posedge clk)
+        ROM_OUT[l4] = d;
     
     initial
     begin

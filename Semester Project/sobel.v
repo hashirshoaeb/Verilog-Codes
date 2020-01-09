@@ -1,18 +1,24 @@
 `include "mux2x1.v"
 module sobel(clk,
-             reset);
+             reset,
+             d,
+             l4);
     // https://timetoexplore.net/blog/initialize-memory-in-verilog
     reg [7:0] ROM_IN  [0:4095];  // = > 64*64 - 1 = > sizeofimage - 1
     reg [7:0] ROM_OUT [0:4095];
     input clk, reset;
-    reg [6:0] row, col, n;
+    reg [6:0] row, col;
     reg [3:0] count;
-    reg [12:0] k,l0,l1,l2,l3,l4,l5,l6,l7,l8;
+    reg [12:0] k,l0,l1,l2,l3,l5,l6,l7,l8;
+    parameter n = 64;
+    parameter t = 27;
+    output d;
+    output reg [12:0] l4;
     
     initial
     begin
-        n = 64;
-        t = 27;
+        // n = 64;
+        // t = 27;
         // reading from in.txt and saving in ROM_IN from address 0 to 4095
         $readmemb ("in.txt", ROM_IN, 0, 4095);
         // $monitor("data_file handle was %0b", ROM_IN[38]);
@@ -66,9 +72,9 @@ module sobel(clk,
     end
     
     
-    reg [7:0] t;
+    // reg [7:0] t;
     reg [7:0]s0,s1,s2,s3,s4,s5,s6,s7,s8;
-    wire d;
+    // wire d;
     wire [7:0]a0,a1,a2,a3;
     wire [7:0]f9,f10,f11,f12,f13,f14;
     wire [7:0]g1,g2,g3,g4;
