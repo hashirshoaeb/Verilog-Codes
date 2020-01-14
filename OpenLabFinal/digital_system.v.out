@@ -1,0 +1,115 @@
+#! /usr/local/bin/vvp
+:ivl_version "10.3 (stable)" "(v10_3-10-g756674aa)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7fcffcd09dc0 .scope module, "digital_system" "digital_system" 2 2;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "reset"
+    .port_info 2 /INPUT 10 "in"
+    .port_info 3 /OUTPUT 1 "final_out"
+o0x104dba038 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7fcffcd15740_0 .net "clk", 0 0, o0x104dba038;  0 drivers
+v0x7fcffcd15810_0 .net "der", 9 0, L_0x7fcffcd15d70;  1 drivers
+v0x7fcffcd158f0_0 .net "dummy_out", 9 0, L_0x7fcffcd15ef0;  1 drivers
+o0x104dba398 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7fcffcd15980_0 .net "final_out", 0 0, o0x104dba398;  0 drivers
+o0x104dba068 .functor BUFZ 10, C4<zzzzzzzzzz>; HiZ drive
+v0x7fcffcd15a10_0 .net "in", 9 0, o0x104dba068;  0 drivers
+v0x7fcffcd15af0_0 .net "out", 9 0, L_0x7fcffcd15cb0;  1 drivers
+o0x104dba0c8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x7fcffcd15bc0_0 .net "reset", 0 0, o0x104dba0c8;  0 drivers
+S_0x7fcffcd04a10 .scope module, "obj" "partA" 2 13, 2 48 0, S_0x7fcffcd09dc0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "reset"
+    .port_info 2 /INPUT 10 "in"
+    .port_info 3 /OUTPUT 10 "out"
+L_0x7fcffcd15cb0 .functor BUFZ 10, o0x104dba068, C4<0000000000>, C4<0000000000>, C4<0000000000>;
+v0x7fcffcd04b70 .array "RAM", 511 0, 9 0;
+v0x7fcffcd04c00_0 .var "RAM_index", 8 0;
+v0x7fcffcd149e0_0 .net "clk", 0 0, o0x104dba038;  alias, 0 drivers
+v0x7fcffcd14a90_0 .net "in", 9 0, o0x104dba068;  alias, 0 drivers
+v0x7fcffcd14b40_0 .net "out", 9 0, L_0x7fcffcd15cb0;  alias, 1 drivers
+v0x7fcffcd14c30_0 .net "reset", 0 0, o0x104dba0c8;  alias, 0 drivers
+E_0x7fcffcd09f20 .event edge, v0x7fcffcd14a90_0, v0x7fcffcd04c00_0;
+E_0x7fcffcd0b390/0 .event negedge, v0x7fcffcd14c30_0;
+E_0x7fcffcd0b390/1 .event posedge, v0x7fcffcd149e0_0;
+E_0x7fcffcd0b390 .event/or E_0x7fcffcd0b390/0, E_0x7fcffcd0b390/1;
+S_0x7fcffcd14d10 .scope module, "obj1" "derivative" 2 14, 2 25 0, S_0x7fcffcd09dc0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "reset"
+    .port_info 2 /INPUT 10 "in"
+    .port_info 3 /OUTPUT 10 "der"
+v0x7fcffcd14f30_0 .net "clk", 0 0, o0x104dba038;  alias, 0 drivers
+v0x7fcffcd14fe0_0 .net "der", 9 0, L_0x7fcffcd15d70;  alias, 1 drivers
+v0x7fcffcd15080_0 .net "in", 9 0, L_0x7fcffcd15cb0;  alias, 1 drivers
+v0x7fcffcd15150_0 .var "in1", 9 0;
+v0x7fcffcd151f0_0 .var "in2", 9 0;
+v0x7fcffcd152e0_0 .net "reset", 0 0, o0x104dba0c8;  alias, 0 drivers
+L_0x7fcffcd15d70 .arith/sub 10, L_0x7fcffcd15cb0, v0x7fcffcd151f0_0;
+S_0x7fcffcd153c0 .scope module, "obj2" "mydummy" 2 15, 2 19 0, S_0x7fcffcd09dc0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 10 "in"
+    .port_info 1 /OUTPUT 10 "out"
+L_0x7fcffcd15ef0 .functor BUFZ 10, L_0x7fcffcd15d70, C4<0000000000>, C4<0000000000>, C4<0000000000>;
+v0x7fcffcd155a0_0 .net "in", 9 0, L_0x7fcffcd15d70;  alias, 1 drivers
+v0x7fcffcd15670_0 .net "out", 9 0, L_0x7fcffcd15ef0;  alias, 1 drivers
+    .scope S_0x7fcffcd04a10;
+T_0 ;
+    %wait E_0x7fcffcd0b390;
+    %load/vec4 v0x7fcffcd14c30_0;
+    %pad/u 32;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 9;
+    %assign/vec4 v0x7fcffcd04c00_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x7fcffcd04c00_0;
+    %addi 1, 0, 9;
+    %assign/vec4 v0x7fcffcd04c00_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x7fcffcd04a10;
+T_1 ;
+    %wait E_0x7fcffcd09f20;
+    %load/vec4 v0x7fcffcd14a90_0;
+    %load/vec4 v0x7fcffcd04c00_0;
+    %pad/u 11;
+    %ix/vec4 3;
+    %ix/load 4, 0, 0; Constant delay
+    %assign/vec4/a/d v0x7fcffcd04b70, 0, 4;
+    %jmp T_1;
+    .thread T_1, $push;
+    .scope S_0x7fcffcd14d10;
+T_2 ;
+    %wait E_0x7fcffcd0b390;
+    %load/vec4 v0x7fcffcd152e0_0;
+    %pad/u 32;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_2.0, 4;
+    %pushi/vec4 0, 0, 10;
+    %assign/vec4 v0x7fcffcd15150_0, 0;
+    %pushi/vec4 0, 0, 10;
+    %assign/vec4 v0x7fcffcd151f0_0, 0;
+    %jmp T_2.1;
+T_2.0 ;
+    %load/vec4 v0x7fcffcd15080_0;
+    %assign/vec4 v0x7fcffcd15150_0, 0;
+    %load/vec4 v0x7fcffcd15150_0;
+    %assign/vec4 v0x7fcffcd151f0_0, 0;
+T_2.1 ;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "digital_system.v";
