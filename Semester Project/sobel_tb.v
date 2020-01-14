@@ -9,7 +9,13 @@ module sobel_tb();
     
     reg [7:0] ROM_OUT [0:4095];
     always@(posedge clk)
+    begin
         ROM_OUT[l4] = d;
+        $File       = $fopen("temp_out.txt", "a+");
+        fwrite($File, d, 8);
+        fclose($File);
+    end
+    
     
     initial
     begin
